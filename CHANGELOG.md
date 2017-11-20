@@ -1,6 +1,6 @@
 # 20.11.17
 
-### commit
+### commit 144569056889bfa1a8cf1c048622fe405b623994
 * added class News
 
 ### commit cd10d67f3722eeca34de38f5f1c5606a508afd19
