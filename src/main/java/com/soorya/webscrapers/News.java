@@ -1,13 +1,27 @@
 package com.soorya.webscrapers;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 public class News
 {
-    LocalDateTime dateTime;
+    String timestamp;
     String title;
     String authorName;
     String content;
-    ArrayList<String> tags;
+    String tags;
+
+    News(String timestamp,String title,String author,String content,String tags)
+    {
+        this.timestamp = timestamp;
+        this.title = title;
+        this.authorName = author;
+        this.content = content;
+        this.tags = tags;
+    }
+
+    News(String timestamp,String title,String author,String content)
+    {
+        this.timestamp = timestamp;
+        this.title = title;
+        this.authorName = author;
+        this.content = content;
+    }
 }

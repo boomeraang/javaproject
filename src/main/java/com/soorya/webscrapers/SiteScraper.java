@@ -8,21 +8,27 @@ import java.net.URL;
 
 public class SiteScraper
 {
+    //fetches content from a given url
     public void siteScrape(URL url) throws IOException
     {
         String compare = url.getHost();
+
+        //gets url from url, opens a connection to the site and parses the content
         Document doc = Jsoup.connect(url.toExternalForm()).get();
+
+        //checking domains and fetching content using appropriate tags
         if(compare.matches("(.*)life(.*)") || compare.matches("(.*)kotaku(.*)")  || compare.matches("(.*)io9(.*)"))
         {
             String title = doc.title();
             String author = doc.select(".meta__byline").first().text();
-            String time = doc.select(".meta__time").first().text();
+            String timestamp = doc.select(".meta__time").first().text();
             String tags = doc.select(".post-tags-container").first().text();
             String content = doc.select(".post-content").first().text();
 
+            News news = new News(timestamp,title,author,content,tags);
             System.out.println(title);
             System.out.println(author);
-            System.out.println(time);
+            System.out.println(timestamp);
             System.out.println(tags);
             System.out.println(content);
             //System.out.println(doc.body().text());
@@ -33,13 +39,14 @@ public class SiteScraper
         {
             String title = doc.title();
             String author = doc.select("a[class=b]").text();
-            String timestamp = doc.selectFirst("em").text();
+            //String timestamp = doc.selectFirst("em").text();
             String tags = doc.select(".hide_resp2 li a[href]").text();
-            String content = doc.selectFirst(".articleContent").text();
+            String content = doc.select(".articleContent").text();
 
+            //News news = new News(timestamp,title,author,content,tags);
             System.out.println(title);
             System.out.println(author);
-            System.out.println(timestamp);
+            //System.out.println(timestamp);
             System.out.println(tags);
             System.out.println(content);
         }
@@ -52,7 +59,9 @@ public class SiteScraper
             String tags = doc.select(".related-tags a[href]").text();
             String content = doc.select(".article-text p[class]").text();
 
-            System.out.println(title);
+            News news = new News(timestamp,title,author,content,tags);
+
+            /*System.out.println(title);
             System.out.println(author);
             System.out.println(timestamp);
             timestamp = timestamp.replaceAll("[;,]","");
@@ -101,7 +110,7 @@ public class SiteScraper
             System.out.println(yearInt);
 
             System.out.println(tags);
-            //System.out.println(content);
+            //System.out.println(content);*/
         }
 
         else if(compare.matches("(.*)timesofindia(.*)"))
@@ -112,7 +121,9 @@ public class SiteScraper
             //String tags = doc.select(".related-tags a[href]").text();
             String content = doc.select(".normal").text();
 
-            System.out.println(title);
+            News news = new News(timestamp,title,author,content);
+
+            /*System.out.println(title);
             System.out.println(author);
             System.out.println(timestamp);
             //System.out.println(tags);
@@ -126,8 +137,8 @@ public class SiteScraper
             String minutes = timestampArray[6];
 
 
-            /*for(String word:timestampArray)
-                System.out.println(word);*/
+            for(String word:timestampArray)
+                System.out.println(word);
             int monthInt = 0;
             {
                 if(month.matches("(?i)jan(.*)"))
@@ -164,7 +175,7 @@ public class SiteScraper
             System.out.println(dateInt);
             System.out.println(yearInt);
             System.out.println(hourInt);
-            System.out.println(minutesInt);
+            System.out.println(minutesInt);*/
         }
     }
 }
